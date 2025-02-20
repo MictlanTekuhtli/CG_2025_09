@@ -91,11 +91,11 @@ void myData()
 		-0.13857f,	0.67195f,	0.0f,	0.2f, 0.2f, 0.8f,//J #7
 		-0.06724f,	0.63397f,	0.0f,	0.2f, 0.2f, 0.8f,//K #8
 		-0.10985f,	0.55431f,	0.0f,	0.2f, 0.2f, 0.8f,//L #9
-		-0.22472f,	0.44408f,	0.0f,//M #10
-		-0.42666f,	0.39313f,	0.0f,//N #11
-		-0.36552f,	0.45102f,	0.0f,//O #12
-		-0.36135f,	0.56774f,	0.0f,//P #13
-		-0.00855f,	0.45199f,	0.0f,//Q #14
+		-0.22472f,	0.44408f,	0.0f,	0.2f, 0.2f, 0.8f,//M #10
+		-0.42666f,	0.39313f,	0.0f,	0.2f, 0.2f, 0.8f,//N #11
+		-0.36552f,	0.45102f,	0.0f,	0.2f, 0.2f, 0.8f,//O #12
+		-0.36135f,	0.56774f,	0.0f,	0.2f, 0.2f, 0.8f,//P #13
+		-0.00855f,	0.45199f,	0.0f,	0.2f, 0.2f, 0.8f,//Q #14
 		0.05791f,	0.40693f,	0.0f,//R #15
 		0.11596f,	0.3061f,	0.0f,//S #16
 		-0.0421f,	0.35741f,	0.0f,//T #17
@@ -139,7 +139,7 @@ void myData()
 	unsigned int indices[] =
 	{
 		2,1,0,3,4,6,5, //E,D,C,F,G,I,H
-		7,6,4,9,//J,I,G,L
+		7,6,4,9,14,8//J,I,G,L,Q,K
 	};
 
 	glGenVertexArrays(2, VAO);//se crea 2 arreglos de vertices llamado "VAO"
@@ -267,7 +267,7 @@ int main()
 		//glDrawElements(GL_POINTS, 5, GL_UNSIGNED_INT, 0);
 		//glDrawArrays(GL_POINTS, 0, 52);
 		glDrawElements(GL_TRIANGLE_FAN, 7, GL_UNSIGNED_INT, (void*)(0 * sizeof(float)));
-		glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, (void*)(7 * sizeof(float)));
+		glDrawElements(GL_TRIANGLE_FAN, 6, GL_UNSIGNED_INT, (void*)(7 * sizeof(float)));
 
 		glBindVertexArray(0);
 		glUseProgram(0);
