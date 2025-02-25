@@ -125,23 +125,54 @@ void myData()
 		0.9146f,	-0.32991f,	0.0f,	0.8f, 0.8f, 0.8f,//F_2	#34
 		0.77959f,	-0.21764f,	0.0f,	0.8f, 0.8f, 0.8f,//G_2	#35
 		0.80375f,	-0.0798f,	0.0f,	0.8f, 0.8f, 0.8f,//H_2	#36
-
-		-0.13857f,	0.67195f,	0.0f,//J 
-		-0.06724f,	0.63397f,	0.0f,//K 
-		-0.10985f,	0.55431f,	0.0f,//L 
-		-0.00855f,	0.45199f,	0.0f,//Q 
-		0.05791f,	0.40693f,	0.0f,//R 
-		0.05218f,	0.15634f,	0.0f,//B_1 
-		-0.17161f,	0.05182f,	0.0f,//C_1 
-		0.29849f,	-0.08113f,	0.0f,//D_1 
-		0.0f,		0.0f,		0.0f,//E_1 
-		-0.13866f,	-0.46912f,	0.0f,//I_1 
-		0.05376f,	-0.5572f,	0.0f,//R_1 
-		0.42498f,	-0.58516f,	0.0f,//W_1 
-		0.33667f,	-0.44434f,	0.0f,//Z_1 
-		0.468f,		-0.41177f,	0.0f,//A_2 
-		0.51649f,	-0.61202f,	0.0f,//B_2 
-		0.59784f,	-0.7137f,	0.0f,//C_2 
+		//Parte Roja
+		//Cabeza
+		-0.13857f,	0.67195f,	0.0f,	0.8f, 0.0f, 0.0f,//J	#37 
+		-0.06724f,	0.63397f,	0.0f,	0.8f, 0.0f, 0.0f,//K	#38
+		-0.10985f,	0.55431f,	0.0f,	0.8f, 0.0f, 0.0f,//L	#39
+		-0.00855f,	0.45199f,	0.0f,	0.8f, 0.0f, 0.0f,//Q	#40
+		-0.20249f,	0.84471f,	0.0f,	0.8f, 0.0f, 0.0f,//I	#41
+		-0.20417f,	0.64846f,	0.0f,	0.8f, 0.0f, 0.0f,//G	#42
+		-0.26888f,	0.55844f,	0.0f,	0.8f, 0.0f, 0.0f,//F	#43
+		-0.22472f,	0.44408f,	0.0f,	0.8f, 0.0f, 0.0f,//M	#44
+		-0.06823f,	0.30629f,	0.0f,	0.8f, 0.0f, 0.0f,//W	#45
+		-0.0421f,	0.35741f,	0.0f,	0.8f, 0.0f, 0.0f,//S	#46
+		//oreja
+		0.05791f,	0.40693f,	0.0f,	0.8f, 0.0f, 0.0f,//R	#47
+		0.11596f,	0.3061f,	0.0f,	0.8f, 0.0f, 0.0f,//T	#48
+		//cuerpo
+		-0.49763f,	0.155199f,	0.0f,	0.8f, 0.0f, 0.0f,//A_1	#49
+		-0.00132f,	-0.22054f,	0.0f,	0.8f, 0.0f, 0.0f,//F_1	#50
+		0.0f,		0.0f,		0.0f,	0.8f, 0.0f, 0.0f,//E_1	#51
+		-0.17161f,	0.05182f,	0.0f,	0.8f, 0.0f, 0.0f,//C_1	#52
+		0.05218f,	0.15634f,	0.0f,	0.8f, 0.0f, 0.0f,//B_1	#53
+		-0.06823f,	0.30629f,	0.0f,	0.8f, 0.0f, 0.0f,//W	#54
+		-0.0103f,	0.25517f,	0.0f,	0.8f, 0.0f, 0.0f,//V	#55
+		//lomo
+		0.29849f,	-0.08113f,	0.0f,	0.8f, 0.0f, 0.0f,//D_1	#56
+		-0.00132f,	-0.22054f,	0.0f,	0.8f, 0.0f, 0.0f,//F_1	#57
+		0.05376f,	-0.5572f,	0.0f,	0.8f, 0.0f, 0.0f,//R_1	#58
+		0.33667f,	-0.44434f,	0.0f,	0.8f, 0.0f, 0.0f,//Z_1	#59
+		0.42498f,	-0.58516f,	0.0f,	0.8f, 0.0f, 0.0f,//W_1	#60
+		0.468f,		-0.41177f,	0.0f,	0.8f, 0.0f, 0.0f,//A_2	#61
+		//pansa
+		-0.13866f,	-0.46912f,	0.0f,	0.8f, 0.0f, 0.0f,//I_1	#62
+		-0.14544f,	-0.6114f,	0.0f,	0.8f, 0.0f, 0.0f,//Q_1	#63
+		-0.20641f,	-0.22114f,	0.0f,	0.8f, 0.0f, 0.0f,//H_1	#64
+		-0.2f,		-0.4f,		0.0f,	0.8f, 0.0f, 0.0f,//J_1	#65
+		//pata
+		-0.36225f,	-0.22114f,	0.0f,	0.8f, 0.0f, 0.0f,//G_1	#66
+		-0.27959f,	-0.38782f,	0.0f,	0.8f, 0.0f, 0.0f,//K_1	#67
+		-0.20506f,	-0.52468f,	0.0f,	0.8f, 0.0f, 0.0f,//L_1	#68
+		-0.38122f,	-0.75775f,	0.0f,	0.8f, 0.0f, 0.0f,//M_1	#69
+		-0.34463f,	-0.84176f,	0.0f,	0.8f, 0.0f, 0.0f,//P_1	#70
+		//poto
+		0.1905f,	-0.84355f,	0.0f,	0.8f, 0.0f, 0.0f,//V_1	#71
+		0.51649f,	-0.61202f,	0.0f,	0.8f, 0.0f, 0.0f,//B_2	#72
+		0.59784f,	-0.7137f,	0.0f,	0.8f, 0.0f, 0.0f,//C_2	#73
+		//cola
+		0.76254f,	-0.35123f,	0.0f,	0.8f, 0.0f, 0.0f,//E_2	#74
+		0.83786f,	-0.5516f,	0.0f,	0.8f, 0.0f, 0.0f,//D_2	#75
 	};
 
 	unsigned int indices[] =
@@ -160,6 +191,21 @@ void myData()
 		//35
 		34,36,35,33,32,//F_2,H_2,G_2,E_2,D_2 #5
 		//40
+		39,40,38,37,41,42,43,44,45,46,40,//L,Q,K,J,I,G,F,M,W,S,Q #11
+		//51
+		46,48,47,40,//S,T,R,Q #4
+		//55
+		49,50,51,52,53,55,54,44,//A_1,F_1,E_1,C_1,B_1,V,W,M #8  //11B, 49R
+		//63
+		56,53,52,51,57,58,59,60,61,//D_1,B_1,C_1,E_1,F_1,R_1,Z_1,W_1,A_2 #9
+		//72
+		62,63,58,57,64,65,//I_1,Q_1,R_1,F_1,H_1,J_1 #6
+		//78
+		69,70,68,67,66,//M_1,P_1,L_1,K_1,G_1 #5
+		//83
+		71,73,72,60,59,58,63,//V_1,C_2,B_2,W_1,Z_1,R_1,Q_1 #7
+		//90
+		72,73,75,74//B_2,C_2,D_2,E_2 #4
 	};
 
 	glGenVertexArrays(2, VAO);//se crea 2 arreglos de vertices llamado "VAO"
@@ -286,6 +332,7 @@ int main()
 		glPointSize(10.0);
 		//glDrawElements(GL_POINTS, 5, GL_UNSIGNED_INT, 0);
 		//glDrawArrays(GL_POINTS, 0, 52);
+		//Parte Blanca
 		glDrawElements(GL_TRIANGLE_FAN, 7, GL_UNSIGNED_INT, (void*)(0 * sizeof(float)));
 		glDrawElements(GL_TRIANGLE_FAN, 7, GL_UNSIGNED_INT, (void*)(7 * sizeof(float)));
 		glDrawElements(GL_TRIANGLE_FAN, 5, GL_UNSIGNED_INT, (void*)(14 * sizeof(float)));
@@ -293,6 +340,15 @@ int main()
 		glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, (void*)(26 * sizeof(float)));
 		glDrawElements(GL_TRIANGLE_FAN, 5, GL_UNSIGNED_INT, (void*)(30 * sizeof(float)));
 		glDrawElements(GL_TRIANGLE_FAN, 5, GL_UNSIGNED_INT, (void*)(35 * sizeof(float)));
+		//Parte roja
+		glDrawElements(GL_TRIANGLE_FAN, 11, GL_UNSIGNED_INT, (void*)(40 * sizeof(float)));
+		glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, (void*)(51 * sizeof(float)));
+		glDrawElements(GL_TRIANGLE_FAN, 8, GL_UNSIGNED_INT, (void*)(55 * sizeof(float)));
+		glDrawElements(GL_TRIANGLE_FAN, 9, GL_UNSIGNED_INT, (void*)(63 * sizeof(float)));
+		glDrawElements(GL_TRIANGLE_FAN, 6, GL_UNSIGNED_INT, (void*)(72 * sizeof(float)));
+		glDrawElements(GL_TRIANGLE_FAN, 5, GL_UNSIGNED_INT, (void*)(78 * sizeof(float)));
+		glDrawElements(GL_TRIANGLE_FAN, 7, GL_UNSIGNED_INT, (void*)(83 * sizeof(float)));
+		glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, (void*)(90 * sizeof(float)));
 
 		glBindVertexArray(0);
 		glUseProgram(0);
