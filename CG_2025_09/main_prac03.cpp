@@ -29,7 +29,7 @@ void myData(void);
 void getResolution(void);
 
 //For Keyboard
-float	movX = 0.0f, movY = 0.0f, movZ =-5.0f,
+float	movX = 0.0f, movY = 0.0f, movZ =-15.0f,
 rotY = 0.0f, rotX = 0.0f, rotZ = 0.0f;
 
 void getResolution()
@@ -194,6 +194,7 @@ int main()
 	glm::mat4 modelOp = glm::mat4(1.0f);		// initialize Matrix, Use this matrix for individual models
 	glm::mat4 viewOp = glm::mat4(1.0f);			//Use this matrix for ALL models
 	glm::mat4 projectionOp = glm::mat4(1.0f);	//This matrix is for Projection
+	glm::mat4 model1 = glm::mat4(1.0f);
 
 	//Use "projection" in order to change how we see the information
 	projectionOp = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
@@ -224,22 +225,46 @@ int main()
 		myShader.setMat4("projection", projectionOp);
 		
 
-		glBindVertexArray(VAO[1]);	//Enable data array [1]
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[1]); //Only if we are going to work with index
+		//glBindVertexArray(VAO[1]);	//Enable data array [1]
+		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[1]); //Only if we are going to work with index
 
-		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-		myShader.setMat4("model", modelOp);
+		//modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+		//myShader.setMat4("model", modelOp);
 		//glDrawArrays(GL_LINE_LOOP, 0, 8); //My C
-		glDrawElements(GL_TRIANGLE_FAN, 6, GL_UNSIGNED_INT, (void*)(0 * sizeof(float)));	//to Draw using index
-		glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, (void*)(6 * sizeof(float)));	//to Draw using index
+		//glDrawElements(GL_TRIANGLE_FAN, 6, GL_UNSIGNED_INT, (void*)(0 * sizeof(float)));	//to Draw using index
+		//glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, (void*)(6 * sizeof(float)));	//to Draw using index
 
 
 		/*-------------------Second figure-------------------*/
 		glBindVertexArray(VAO[0]);	//Enable data array [0]
-		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(1.5f, 0.0f, 0.0f));
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(1.0f,0.0f,0.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube1
+		model1 = modelOp;
+
+		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
+		myShader.setMat4("model", modelOp);
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube2
+
+		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
+		myShader.setMat4("model", modelOp);
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube3
+/*
+		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
 		myShader.setMat4("model", modelOp);
 		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube
 
+		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
+		myShader.setMat4("model", modelOp);
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube
+
+		modelOp = model1;
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+		myShader.setMat4("model", modelOp);
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube
+*/
 		glBindVertexArray(0);
 		/*****************************************************************/
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
