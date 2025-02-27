@@ -29,12 +29,8 @@ void myData(void);
 void getResolution(void);
 
 //For Keyboard
-float	movX = 0.0f,
-		movY = 0.0f,
-		movZ = 0.0f;
-
-
-
+float	movX = 0.0f, movY = 0.0f, movZ =-5.0f,
+rotY = 0.0f, rotX = 0.0f, rotZ = 0.0f;
 
 void getResolution()
 {
@@ -200,8 +196,8 @@ int main()
 	glm::mat4 projectionOp = glm::mat4(1.0f);	//This matrix is for Projection
 
 	//Use "projection" in order to change how we see the information
-	//projectionOp = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-	projectionOp = glm::ortho(-5.0f, 5.0f, -3.0f, 3.0f, 0.1f, 10.0f);
+	projectionOp = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+	//projectionOp = glm::ortho(-5.0f, 5.0f, -3.0f, 3.0f, 0.1f, 10.0f);
 
     // render loop
     // While the windows is not closed
@@ -220,6 +216,7 @@ int main()
 		/*******************************************/
 		//Use "view" in order to affect all models
 		viewOp = glm::translate(glm::mat4(1.0f), glm::vec3(movX, movY, movZ));//toma de referencia el origen
+		viewOp = glm::rotate(viewOp, glm::radians(rotY), glm::vec3(0.0f, 1.0f, 0.0f));
 		// pass them to the shaders
 		myShader.setMat4("model", modelOp);
 		myShader.setMat4("view", viewOp);
@@ -238,10 +235,10 @@ int main()
 
 
 		/*-------------------Second figure-------------------*/
-		//glBindVertexArray(VAO[0]);	//Enable data array [0]
-		//modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(1.5f, 0.0f, 0.0f));
-		//myShader.setMat4("model", modelOp);
-		//glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube
+		glBindVertexArray(VAO[0]);	//Enable data array [0]
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(1.5f, 0.0f, 0.0f));
+		myShader.setMat4("model", modelOp);
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube
 
 		glBindVertexArray(0);
 		/*****************************************************************/
@@ -275,6 +272,10 @@ void my_input(GLFWwindow *window)
 		movZ += 0.005f;
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
 		movZ -= 0.005f;
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+		rotY += 0.1f;
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+		rotY -= 0.1f;
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
