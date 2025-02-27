@@ -240,16 +240,18 @@ int main()
 
 		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 		myShader.setMat4("model", modelOp);
-		myShader.setVec3("aColor", glm::vec3(1.0f,0.0f,0.0f));
+		myShader.setVec3("aColor", glm::vec3(1.0f,1.0f,1.0f));
 		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube1
 		model1 = modelOp;
 
 		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
 		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(1.0f, 0.0f, 0.0f));
 		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube2
 
 		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
 		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.0f, 0.0f, 1.0f));
 		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube3
 /*
 		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
