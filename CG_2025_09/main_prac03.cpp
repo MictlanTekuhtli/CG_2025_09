@@ -2,7 +2,7 @@
 /* ----------------   Práctica 3 --------------------------*/
 /*-----------------    2025-2   ---------------------------*/
 /*-------Alumno: Lopez Flores Diego Alberto	 --------------*/
-/*-------Cuenta:                         ------------------*/
+/*-------Cuenta: 315081143               ------------------*/
 #include <glew.h>
 #include <glfw3.h>
 
@@ -29,6 +29,10 @@ void myData(void);
 void getResolution(void);
 
 //For Keyboard
+float	movX = 0.0f,
+		movY = 0.0f,
+		movZ = 0.0f;
+
 
 
 
@@ -215,7 +219,7 @@ int main()
 		//Mi función de dibujo
 		/*******************************************/
 		//Use "view" in order to affect all models
-		viewOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+		viewOp = glm::translate(glm::mat4(1.0f), glm::vec3(movX, movY, movZ));//toma de referencia el origen
 		// pass them to the shaders
 		myShader.setMat4("model", modelOp);
 		myShader.setMat4("view", viewOp);
@@ -259,7 +263,18 @@ void my_input(GLFWwindow *window)
 {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)  //GLFW_RELEASE
         glfwSetWindowShouldClose(window, true);
-
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		movX -= 0.005f;
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		movX += 0.005f;
+	if (glfwGetKey(window, GLFW_KEY_PAGE_UP) == GLFW_PRESS)
+		movY += 0.005f;
+	if (glfwGetKey(window, GLFW_KEY_PAGE_DOWN) == GLFW_PRESS)
+		movY -= 0.005f;
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		movZ += 0.005f;
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+		movZ -= 0.005f;
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
