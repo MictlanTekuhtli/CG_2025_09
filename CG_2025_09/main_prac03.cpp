@@ -32,6 +32,49 @@ void getResolution(void);
 float	movX = 0.0f, movY = 0.0f, movZ =-15.0f,
 rotY = 0.0f, rotX = 0.0f, rotZ = 0.0f;
 
+//datos para la practica
+struct Pixel
+{
+	bool Draw = true;
+	float R = 0.0f, G = 0.0f, B = 0.0f;
+};
+Pixel matrix[13][13];
+
+void InicializarMatriz() {
+	matrix[0][0].Draw = false;
+	matrix[0][1].Draw = false;
+	matrix[0][2].Draw = false;
+	matrix[0][3].Draw = false;
+	matrix[0][9].Draw = false;
+	matrix[0][10].Draw = false;
+	matrix[0][11].Draw = false;
+	matrix[0][12].Draw = false;
+	matrix[1][0].Draw = false;
+	matrix[1][1].Draw = false;
+	matrix[1][12].Draw = false;
+	matrix[1][11].Draw = false;
+	matrix[2][0].Draw = false;
+	matrix[2][12].Draw = false;
+	matrix[3][0].Draw = false;
+	matrix[3][12].Draw = false;
+	matrix[9][0].Draw = false;
+	matrix[9][12].Draw = false;
+	matrix[10][0].Draw = false;
+	matrix[10][12].Draw = false;
+	matrix[11][0].Draw = false;
+	matrix[11][1].Draw = false;
+	matrix[11][12].Draw = false;
+	matrix[11][11].Draw = false;
+	matrix[12][0].Draw = false;
+	matrix[12][1].Draw = false;
+	matrix[12][2].Draw = false;
+	matrix[12][3].Draw = false;
+	matrix[12][9].Draw = false;
+	matrix[12][10].Draw = false;
+	matrix[12][11].Draw = false;
+	matrix[12][12].Draw = false;
+}
+
 void getResolution()
 {
 	const GLFWvidmode * mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
@@ -239,34 +282,24 @@ int main()
 		glBindVertexArray(VAO[0]);	//Enable data array [0]
 
 		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+		model1 = modelOp;
+
+		for (int i = 0; i < 13; i++) {
+			for (int j = 0; j < 13; j++) {
+				modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+				myShader.setMat4("model", modelOp);
+				myShader.setVec3("aColor", glm::vec3(1.0f, 1.0f, 1.0f));
+				glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube1
+				model1 = modelOp;
+			}
+		}
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 		myShader.setMat4("model", modelOp);
 		myShader.setVec3("aColor", glm::vec3(1.0f,1.0f,1.0f));
 		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube1
-		//model1 = modelOp;
+		model1 = modelOp;
 
-		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
-		myShader.setMat4("model", modelOp);
-		myShader.setVec3("aColor", glm::vec3(1.0f, 0.0f, 0.0f));
-		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube2
-
-		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
-		myShader.setMat4("model", modelOp);
-		myShader.setVec3("aColor", glm::vec3(0.0f, 0.0f, 1.0f));
-		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube3
-/*
-		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
-		myShader.setMat4("model", modelOp);
-		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube
-
-		modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
-		myShader.setMat4("model", modelOp);
-		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube
-
-		modelOp = model1;
-		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-		myShader.setMat4("model", modelOp);
-		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube
-*/
 		glBindVertexArray(0);
 		/*****************************************************************/
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
