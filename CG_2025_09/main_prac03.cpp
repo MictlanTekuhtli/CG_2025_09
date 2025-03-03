@@ -13,6 +13,7 @@
 #include <shader_m.h>
 
 #include <iostream>
+#include <initializer_list>
 
 void resize(GLFWwindow* window, int width, int height);
 void my_input(GLFWwindow *window);
@@ -27,7 +28,8 @@ GLuint VBO[2], VAO[2], EBO[2];
 
 void myData(void);
 void getResolution(void);
-
+void InicializarMatrizDraw(void);
+void InicializarMatrizColor(void);
 //For Keyboard
 float	movX = 0.0f, movY = 0.0f, movZ =-15.0f,
 rotY = 0.0f, rotX = 0.0f, rotZ = 0.0f;
@@ -36,43 +38,60 @@ rotY = 0.0f, rotX = 0.0f, rotZ = 0.0f;
 struct Pixel
 {
 	bool Draw = true;
-	float R = 0.0f, G = 0.0f, B = 0.0f;
+	float R = 1.0f, G = 1.0f, B = 0.0f;
 };
 Pixel matrix[13][13];
 
-void InicializarMatriz() {
-	matrix[0][0].Draw = false;
-	matrix[0][1].Draw = false;
-	matrix[0][2].Draw = false;
-	matrix[0][3].Draw = false;
-	matrix[0][9].Draw = false;
-	matrix[0][10].Draw = false;
-	matrix[0][11].Draw = false;
-	matrix[0][12].Draw = false;
-	matrix[1][0].Draw = false;
-	matrix[1][1].Draw = false;
-	matrix[1][12].Draw = false;
-	matrix[1][11].Draw = false;
-	matrix[2][0].Draw = false;
-	matrix[2][12].Draw = false;
-	matrix[3][0].Draw = false;
-	matrix[3][12].Draw = false;
-	matrix[9][0].Draw = false;
-	matrix[9][12].Draw = false;
-	matrix[10][0].Draw = false;
-	matrix[10][12].Draw = false;
-	matrix[11][0].Draw = false;
-	matrix[11][1].Draw = false;
-	matrix[11][12].Draw = false;
-	matrix[11][11].Draw = false;
-	matrix[12][0].Draw = false;
-	matrix[12][1].Draw = false;
-	matrix[12][2].Draw = false;
-	matrix[12][3].Draw = false;
-	matrix[12][9].Draw = false;
-	matrix[12][10].Draw = false;
-	matrix[12][11].Draw = false;
-	matrix[12][12].Draw = false;
+void InicializarMatrizDraw() {
+	struct Posicion {
+		int fila, columna;
+	};
+
+	const std::initializer_list<Posicion> posiciones = {
+		{0,0}, {0,1}, {0,2}, {0,3}, {0,9}, {0,10}, {0,11}, {0,12},
+		{1,0}, {1,1}, {1,11}, {1,12},
+		{2,0}, {2,12},
+		{3,0}, {3,12},
+		{9,0}, {9,12},
+		{10,0}, {10,12},
+		{11,0}, {11,1}, {11,11}, {11,12},
+		{12,0}, {12,1}, {12,2}, {12,3}, {12,9}, {12,10}, {12,11}, {12,12}
+	};
+
+	for (const auto& p : posiciones) {
+		matrix[p.fila][p.columna].Draw = false;
+	}
+}
+
+void InicializarMatrizColor() {
+	struct Valor {
+		int fila, columna;
+		float G, R;
+	};
+
+	const std::initializer_list<Valor> valores = {
+		{0,4,0.5f,1.0f}, {0,5,0.5f,1.0f}, {0,6,0.5f,1.0f}, {0,7,0.5f,1.0f}, {0,8,0.5f,1.0f},
+		{1,2,0.5f,1.0f}, {1,3,0.5f,1.0f}, {1,4,0.5f,1.0f}, {1,7,0.0f,1.0f}, {1,8,0.0f,1.0f}, 
+		{1,9,0.0f,1.0f}, {1,10,0.5f,1.0f},{2,1,0.5f,1.0f}, {2,6,0.0f,1.0f}, {2,7,0.0f,1.0f}, 
+		{2,8,0.0f,1.0f}, {2,9,0.0f,1.0f}, {2,11,0.5f,1.0f},{3,1,0.5f,1.0f}, {3,5,0.0f,1.0f}, 
+		{3,6,0.0f,1.0f}, {3,7,0.0f,1.0f}, {3,8,0.0f,1.0f}, {3,11,0.5f,1.0f},{4,0,0.5f,1.0f}, 
+		{4,3,0.3f,0.5f}, {4,6,0.0f,1.0f}, {4,7,0.0f,1.0f}, {4,8,0.0f,1.0f}, {4,9,0.0f,1.0f}, 
+		{4,12,0.5f,1.0f},{5,0,0.5f,1.0f}, {5,2,0.3f,0.5f}, {5,7,0.0f,1.0f}, {5,8,0.0f,1.0f}, 
+		{5,9,0.0f,1.0f}, {5,12,0.5f,1.0f},{6,0,0.5f,1.0f}, {6,2,0.3f,0.5f}, {6,12,0.5f,1.0f},
+		{7,0,0.5f,1.0f}, {7,2,0.3f,0.5f}, {7,7,0.0f,1.0f}, {7,8,0.0f,1.0f}, {7,9,0.0f,1.0f}, 
+		{7,12,0.5f,1.0f},{8,0,0.5f,1.0f}, {8,3,0.3f,0.5f}, {8,6,0.0f,1.0f}, {8,7,0.0f,1.0f}, 
+		{8,8,0.0f,1.0f}, {8,9,0.0f,1.0f}, {8,12,0.5f,1.0f},{9,1,0.5f,1.0f}, {9,5,0.0f,1.0f}, 
+		{9,6,0.0f,1.0f}, {9,7,0.0f,1.0f}, {9,8,0.0f,1.0f}, {9,11,0.5f,1.0f},{10,1,0.5f,1.0f},
+		{10,6,0.0f,1.0f}, {10,7,0.0f,1.0f}, {10,8,0.0f,1.0f}, {10,9,0.0f,1.0f}, {10,11,0.5f,1.0f},
+		{11,2,0.5f,1.0f}, {11,3,0.5f,1.0f}, {11,4,0.5f,1.0f}, {11,7,0.0f,1.0f}, {11,8,0.0f,1.0f}, 
+		{11,9,0.0f,1.0f}, {11,10,0.5f,1.0f},{12,4,0.5f,1.0f}, {12,5,0.5f,1.0f}, {12,6,0.5f,1.0f}, 
+		{12,7,0.5f,1.0f}, {12,8,0.5f,1.0f}
+	};
+
+	for (const auto& v : valores) {
+		matrix[v.fila][v.columna].G = v.G;
+		matrix[v.fila][v.columna].R = v.R;
+	}
 }
 
 void getResolution()
@@ -227,6 +246,8 @@ int main()
 	//Datos a utilizar
 	myData();
 	glEnable(GL_DEPTH_TEST);
+	InicializarMatrizDraw();
+	InicializarMatrizColor();
 
 	//Prepare to draw the scene with Projections
 	//Shader myShader("shaders/shader.vs", "shaders/shader.fs");
@@ -286,19 +307,19 @@ int main()
 
 		for (int i = 0; i < 13; i++) {
 			for (int j = 0; j < 13; j++) {
-				modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-				myShader.setMat4("model", modelOp);
-				myShader.setVec3("aColor", glm::vec3(1.0f, 1.0f, 1.0f));
-				glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube1
-				model1 = modelOp;
+				if (matrix[i][j].Draw) {
+					modelOp = glm::translate(model1, glm::vec3(0.0f + i, 0.0f + j, 0.0f));
+					myShader.setMat4("model", modelOp);
+					myShader.setVec3("aColor", glm::vec3(matrix[i][j].R,matrix[i][j].G,matrix[i][j].B));
+					glDrawArrays(GL_TRIANGLES, 0, 36);
+				}
 			}
 		}
 
-		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+		/*modelOp = glm::translate(modelOp, glm::vec3(1.0f, 0.0f, 0.0f));
 		myShader.setMat4("model", modelOp);
-		myShader.setVec3("aColor", glm::vec3(1.0f,1.0f,1.0f));
-		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube1
-		model1 = modelOp;
+		myShader.setVec3("aColor", glm::vec3(0.0f, 0.0f, 1.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36); //My Cube3*/
 
 		glBindVertexArray(0);
 		/*****************************************************************/
