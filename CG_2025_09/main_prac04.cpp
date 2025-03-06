@@ -32,6 +32,9 @@ void getResolution(void);
 float	movX = 0.0f,
 		movY = 0.0f,
 		movZ = -5.0f;
+float	angX = 0.0f,
+		angY = 0.0f,
+		angZ = 0.0f;
 
 void getResolution()
 {
@@ -148,6 +151,9 @@ int main()
 	glm::mat4 viewOp = glm::mat4(1.0f);			//Use this matrix for ALL models
 	glm::mat4 projectionOp = glm::mat4(1.0f);	//This matrix is for Projection
 
+	glm::mat4 modelOp = glm::mat4(1.0f);		// initialize Matrix, Use this matrix for individual models
+	glm::mat4 model1 = glm::mat4(1.0f);			//matriz auxiliar o temporal
+
 	//Use "projection" in order to change how we see the information
 	projectionOp = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
@@ -166,19 +172,84 @@ int main()
 
 		//Mi bloque de dibujo
 		/*******************************************/
-		glm::mat4 modelOp = glm::mat4(1.0f);		// initialize Matrix, Use this matrix for individual models
+
 		//Use "view" in order to affect all models
 		viewOp = glm::translate(glm::mat4(1.0f), glm::vec3(movX, movY, movZ));
+		viewOp = glm::rotate(viewOp, glm::radians(angX), glm::vec3(1.0f, 0.0f, 0.0f));
+		viewOp = glm::rotate(viewOp, glm::radians(angY), glm::vec3(0.0f, 1.0f, 0.0f));
+		viewOp = glm::rotate(viewOp, glm::radians(angZ), glm::vec3(0.0f, 0.0f, 1.0f));
 		// pass them to the shaders
 		myShader.setMat4("model", modelOp);
 		myShader.setMat4("view", viewOp);
 		myShader.setMat4("projection", projectionOp);
 
+
 		//Model
 		glBindVertexArray(VAO);
+
+		//orden de operacion T-> R-> S->
+		//pecho T(0,3.5,0), S(5.5.1)
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 3.5f, 0.0f));
+		model1 = modelOp;
+		modelOp = glm::scale(modelOp, glm::vec3(5.0f, 6.0f, 1.0f));
+		myShader.setMat4("model", modelOp);
 		myShader.setVec3("aColor", glm::vec3(1.0f, 1.0f, 0.0f));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
+		//Cuello T(0.3.25,0) S(0.5,0.5,0.5)
+		modelOp = model1;
+		modelOp = glm::translate(modelOp, glm::vec3(0.0f, 3.25f, 0.0f));
+		model1 = modelOp;
+		modelOp = glm::scale(modelOp, glm::vec3(0.5f,0.5f,1.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(1.0f, 0.0f, 0.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		//Cabeza T(0,1.5,0) S(1.5,2.5,1)
+		modelOp = model1;
+		modelOp = glm::translate(modelOp, glm::vec3(0.0f, 1.50f, 0.0f));
+		model1 = modelOp;
+		modelOp = glm::scale(modelOp, glm::vec3(1.5f, 2.5f, 1.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.0f, 0.0f, 1.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		
+		//cintura T(0,0,0) S(5,1,1)
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(5.0f, 1.0f, 1.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(1.0f, 0.0f, 1.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		
+		//pierna izquierda T(-1.75,-2.25,0) S(1.5,3.5,1)
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-1.75f, -2.25f, 0.0f));
+		model1 = modelOp;
+		modelOp = glm::scale(modelOp, glm::vec3(1.5f, 3.5f, 1.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(1.0f, 0.5f, 1.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
+		//pie izq T(-0.5,-2.15,0) S(2.5,0.8,1)
+		modelOp = model1;
+		modelOp = glm::translate(modelOp, glm::vec3(-0.5f, -2.15f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(2.5f, 0.8f, 1.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.0f, 0.5f, 0.8f));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//pierna izquierda T(1.75,-2.25,0) S(1.5,3.5,1)
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(1.75f, -2.25f, 0.0f));
+		model1 = modelOp;
+		modelOp = glm::scale(modelOp, glm::vec3(1.5f, 3.5f, 1.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(1.0f, 0.5f, 1.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//pie izq T(0.5,-2.15,0) S(2.5,0.8,1)
+		modelOp = model1;
+		modelOp = glm::translate(modelOp, glm::vec3(0.5f, -2.15f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(2.5f, 0.8f, 1.0f));
+		myShader.setMat4("model", modelOp);
+		myShader.setVec3("aColor", glm::vec3(0.0f, 0.5f, 0.8f));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glBindVertexArray(0);
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -200,17 +271,30 @@ void my_input(GLFWwindow *window)
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)  //GLFW_RELEASE
         glfwSetWindowShouldClose(window, true);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		movX += 0.08f;
+		movX += 0.005f;
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		movX -= 0.08f;
+		movX -= 0.005f;
 	if (glfwGetKey(window, GLFW_KEY_PAGE_UP) == GLFW_PRESS)
-		movY += 0.08f;
+		movZ += 0.005f;
 	if (glfwGetKey(window, GLFW_KEY_PAGE_DOWN) == GLFW_PRESS)
-		movY -= 0.08f;
+		movZ -= 0.005f;
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		movZ -= 0.08f;
+		movY += 0.005f;
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		movZ += 0.08f;
+		movY -= 0.005f;
+
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+		angX -= 0.05f;
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		angX += 0.05f;
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+		angY += 0.05f;
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+		angY -= 0.05f;
+	if (glfwGetKey(window, GLFW_KEY_HOME) == GLFW_PRESS)
+		angZ -= 0.05f;
+	if (glfwGetKey(window, GLFW_KEY_END) == GLFW_PRESS)
+		angZ += 0.05f;
 
 }
 
