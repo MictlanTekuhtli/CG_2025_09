@@ -1,5 +1,5 @@
 /*---------------------------------------------------------*/
-/* ----------------   Práctica  ---------------------------*/
+/* ----------------   Práctica 5 --------------------------*/
 /*-----------------    2025-2   ---------------------------*/
 /*---------- Alumno: Lopez Flores Diego Alberto -----------*/
 /*------------- No. Cuenta: 315081143 ---------------------*/
@@ -43,7 +43,7 @@ GLFWmonitor* monitors;
 GLuint VBO[3], VAO[3], EBO[3];
 
 //Camera
-Camera camera(glm::vec3(0.0f, 10.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 10.0f, 3.0f)); //aqui se da el valor de posicion de la camara, siendo el vector de pocision
 float MovementSpeed = 0.1f;
 GLfloat lastX = SCR_WIDTH / 2.0f,
 		lastY = SCR_HEIGHT / 2.0f;
@@ -456,6 +456,7 @@ int main() {
 	Model casaVieja("resources/objects/casa/OldHouse.obj");
 	//Model cubo("resources/objects/cubo/cube02.obj");
 	Model casaDoll("resources/objects/casa/DollHouse.obj");
+	Model casaBruja("CasaBruja/Casa.obj");
 
 	ModelAnim animacionPersonaje("resources/objects/Personaje1/Arm.dae");
 	animacionPersonaje.initShaders(animShader.ID);
@@ -634,6 +635,11 @@ int main() {
 		staticShader.use();
 		staticShader.setMat4("projection", projectionOp);
 		staticShader.setMat4("view", viewOp);
+		
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-120.0f, 0.0f, 0.0f));
+		//modelOp = glm::rotate(modelOp, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", modelOp);
+		casaBruja.Draw(staticShader);
 
 		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(250.0f, 0.0f, -10.0f));
 		modelOp = glm::rotate(modelOp, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
