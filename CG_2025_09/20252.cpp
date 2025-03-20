@@ -464,6 +464,8 @@ int main() {
 	Model spyro("resources/models/Spyro/Spyro.obj");
 	Model torre("resources/models/Torre/Torre.obj");
 
+	ModelAnim vampiro("resources/models/")
+
 	ModelAnim animacionPersonaje("resources/objects/Personaje1/Arm.dae");
 	animacionPersonaje.initShaders(animShader.ID);
 
