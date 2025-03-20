@@ -457,6 +457,12 @@ int main() {
 	//Model cubo("resources/objects/cubo/cube02.obj");
 	Model casaDoll("resources/objects/casa/DollHouse.obj");
 	Model casaBruja("CasaBruja/Casa.obj");
+	//Modelos Practica
+	Model drimogemon("resources/models/Drimogemon/Drimogemon.obj");
+	Model madara("resources/models/Madara/Madara.obj");
+	Model piedra("resources/models/Piedra/Piedra.obj");
+	Model spyro("resources/models/Spyro/Spyro.obj");
+	Model torre("resources/models/Torre/Torre.obj");
 
 	ModelAnim animacionPersonaje("resources/objects/Personaje1/Arm.dae");
 	animacionPersonaje.initShaders(animShader.ID);
@@ -657,6 +663,37 @@ int main() {
 		staticShader.setVec3("dirLight.specular", glm::vec3(0.0f, 0.0f, 0.0f));
 		casaVieja.Draw(staticShader);
 
+		//Modelos de Practica Extra
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-25.0f, 0.0f, 200.0f));
+		modelOp = glm::rotate(modelOp, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(3.0f));
+		staticShader.setMat4("model", modelOp);
+		drimogemon.Draw(staticShader);
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(25.0f, 0.0f, 200.0f));
+		modelOp = glm::rotate(modelOp, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(3.0f));
+		staticShader.setMat4("model", modelOp);
+		madara.Draw(staticShader);
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(30.0f, 0.0f, 200.0f));
+		modelOp = glm::rotate(modelOp, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(3.0f));
+		staticShader.setMat4("model", modelOp);
+		piedra.Draw(staticShader);
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-30.0f, 0.0f, 190.0f));
+		modelOp = glm::rotate(modelOp, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(2.0f));
+		staticShader.setMat4("model", modelOp);
+		spyro.Draw(staticShader);
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-50.0f, -5.0f, 200.0f));
+		modelOp = glm::rotate(modelOp, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(6.0f));
+		staticShader.setMat4("model", modelOp);
+		torre.Draw(staticShader);
+
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Carro
 		// -------------------------------------------------------------------------------------------------------------------------
@@ -692,20 +729,6 @@ int main() {
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Personaje
 		// -------------------------------------------------------------------------------------------------------------------------
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Just in case
