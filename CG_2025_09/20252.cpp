@@ -464,7 +464,8 @@ int main() {
 	Model spyro("resources/models/Spyro/Spyro.obj");
 	Model torre("resources/models/Torre/Torre.obj");
 
-	ModelAnim vampiro("resources/models/")
+	ModelAnim vampiro("resources/models/Vampiro/Vampiro.dae");
+	vampiro.initShaders(animShader.ID);
 
 	ModelAnim animacionPersonaje("resources/objects/Personaje1/Arm.dae");
 	animacionPersonaje.initShaders(animShader.ID);
@@ -592,7 +593,11 @@ int main() {
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Segundo Personaje Animacion
 		// -------------------------------------------------------------------------------------------------------------------------
-
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 20.0f)); // translate it down so it's at the center of the scene
+		modelOp = glm::scale(modelOp, glm::vec3(0.10f));	// it's a bit too big for our scene, so scale it down
+		//modelOp = glm::rotate(modelOp, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		animShader.setMat4("model", modelOp);
+		vampiro.Draw(animShader);
 
 
 
