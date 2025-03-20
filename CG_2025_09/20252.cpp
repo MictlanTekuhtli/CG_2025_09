@@ -1,5 +1,5 @@
 /*---------------------------------------------------------*/
-/* ----------------   Práctica  ---------------------------*/
+/* ----------------   Práctica 5 --------------------------*/
 /*-----------------    2025-2   ---------------------------*/
 /*---------- Alumno: Lopez Flores Diego Alberto -----------*/
 /*------------- No. Cuenta: 315081143 ---------------------*/
@@ -41,9 +41,9 @@ unsigned int SCR_HEIGHT = 600;
 GLFWmonitor* monitors;
 
 GLuint VBO[3], VAO[3], EBO[3];
-
+//wasubo
 //Camera
-Camera camera(glm::vec3(0.0f, 10.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 10.0f, 300.0f)); //aqui se da el valor de posicion de la camara, siendo el vector de pocision
 float MovementSpeed = 0.1f;
 GLfloat lastX = SCR_WIDTH / 2.0f,
 		lastY = SCR_HEIGHT / 2.0f;
@@ -209,8 +209,6 @@ void LoadTextures()
 	//This must be the last
 	t_white = generateTextures("Texturas/white.jpg", 0, false);
 }
-
-
 
 void animate(void) 
 {
@@ -456,6 +454,16 @@ int main() {
 	Model casaVieja("resources/objects/casa/OldHouse.obj");
 	//Model cubo("resources/objects/cubo/cube02.obj");
 	Model casaDoll("resources/objects/casa/DollHouse.obj");
+	Model casaBruja("CasaBruja/Casa.obj");
+	//Modelos Practica
+	Model drimogemon("resources/models/Drimogemon/Drimogemon.obj");
+	Model madara("resources/models/Madara/Madara.obj");
+	Model piedra("resources/models/Piedra/Piedra.obj");
+	Model spyro("resources/models/Spyro/Spyro.obj");
+	Model torre("resources/models/Torre/Torre.obj");
+
+	ModelAnim vampiro("resources/models/Vampiro/Vampiro.dae");
+	vampiro.initShaders(animShader.ID);
 
 	ModelAnim animacionPersonaje("resources/objects/Personaje1/Arm.dae");
 	animacionPersonaje.initShaders(animShader.ID);
@@ -583,7 +591,11 @@ int main() {
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Segundo Personaje Animacion
 		// -------------------------------------------------------------------------------------------------------------------------
-
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 20.0f)); // translate it down so it's at the center of the scene
+		modelOp = glm::scale(modelOp, glm::vec3(0.10f));	// it's a bit too big for our scene, so scale it down
+		//modelOp = glm::rotate(modelOp, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		animShader.setMat4("model", modelOp);
+		vampiro.Draw(animShader);
 
 
 
@@ -634,6 +646,11 @@ int main() {
 		staticShader.use();
 		staticShader.setMat4("projection", projectionOp);
 		staticShader.setMat4("view", viewOp);
+		
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-120.0f, 0.0f, 0.0f));
+		//modelOp = glm::rotate(modelOp, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		staticShader.setMat4("model", modelOp);
+		casaBruja.Draw(staticShader);
 
 		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(250.0f, 0.0f, -10.0f));
 		modelOp = glm::rotate(modelOp, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -650,6 +667,37 @@ int main() {
 		staticShader.setMat4("model", modelOp);
 		staticShader.setVec3("dirLight.specular", glm::vec3(0.0f, 0.0f, 0.0f));
 		casaVieja.Draw(staticShader);
+
+		//Modelos de Practica Extra
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-25.0f, 0.0f, 200.0f));
+		modelOp = glm::rotate(modelOp, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(3.0f));
+		staticShader.setMat4("model", modelOp);
+		drimogemon.Draw(staticShader);
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(25.0f, 0.0f, 200.0f));
+		modelOp = glm::rotate(modelOp, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(3.0f));
+		staticShader.setMat4("model", modelOp);
+		madara.Draw(staticShader);
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(30.0f, 0.0f, 200.0f));
+		modelOp = glm::rotate(modelOp, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(3.0f));
+		staticShader.setMat4("model", modelOp);
+		piedra.Draw(staticShader);
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-30.0f, 0.0f, 190.0f));
+		modelOp = glm::rotate(modelOp, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(2.0f));
+		staticShader.setMat4("model", modelOp);
+		spyro.Draw(staticShader);
+
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-50.0f, -5.0f, 200.0f));
+		modelOp = glm::rotate(modelOp, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		modelOp = glm::scale(modelOp, glm::vec3(6.0f));
+		staticShader.setMat4("model", modelOp);
+		torre.Draw(staticShader);
 
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Carro
@@ -686,20 +734,6 @@ int main() {
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Personaje
 		// -------------------------------------------------------------------------------------------------------------------------
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Just in case
