@@ -43,7 +43,7 @@ GLFWmonitor* monitors;
 GLuint VBO[3], VAO[3], EBO[3];
 
 //Camera
-Camera camera(glm::vec3(0.0f, 10.0f, 3.0f)); //aqui se da el valor de posicion de la camara, siendo el vector de pocision
+Camera camera(glm::vec3(0.0f, 10.0f, 300.0f)); //aqui se da el valor de posicion de la camara, siendo el vector de pocision
 float MovementSpeed = 0.1f;
 GLfloat lastX = SCR_WIDTH / 2.0f,
 		lastY = SCR_HEIGHT / 2.0f;
