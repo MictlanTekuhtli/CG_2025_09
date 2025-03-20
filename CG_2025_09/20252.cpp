@@ -210,8 +210,6 @@ void LoadTextures()
 	t_white = generateTextures("Texturas/white.jpg", 0, false);
 }
 
-
-
 void animate(void) 
 {
 	if (play)
