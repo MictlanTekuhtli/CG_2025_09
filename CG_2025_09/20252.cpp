@@ -43,7 +43,7 @@ GLFWmonitor* monitors;
 GLuint VBO[3], VAO[3], EBO[3];
 //wasubo
 //Camera
-Camera camera(glm::vec3(0.0f, 10.0f, 300.0f)); //aqui se da el valor de posicion de la camara, siendo el vector de pocision
+Camera camera(glm::vec3(0.0f, 10.0f, 100.0f)); //aqui se da el valor de posicion de la camara, siendo el vector de pocision
 float MovementSpeed = 0.1f;
 GLfloat lastX = SCR_WIDTH / 2.0f,
 		lastY = SCR_HEIGHT / 2.0f;
@@ -447,13 +447,23 @@ int main() {
 	skyboxShader.setInt("skybox", 0);
 
 	// load models
-	// -----------
+	// ------------------------------------------------------------------------------
 
 	//Model cubo("resources/objects/cubo/cube02.obj");
 	Model casaDoll("resources/objects/casa/DollHouse.obj");
 
 	ModelAnim vampiro("resources/models/Vampiro/Vampiro.dae");
 	vampiro.initShaders(animShader.ID);
+
+	Model SCabeza("resources/objects/Stewie/Cabeza.obj");
+	Model STorso("resources/objects/Stewie/Torso.obj");
+	Model SBrazoizq("resources/objects/Stewie/Brazoizq.obj");
+	Model SBrazoder("resources/objects/Stewie/Brazoder.obj");
+	Model SPiernaizq("resources/objects/Stewie/Piernaizq.obj");
+	Model SPiertnader("resources/objects/Stewie/Piernader.obj");
+	Model SBotaizq("resources/objects/Stewie/Botaizq.obj");
+	Model SBotader("resources/objects/Stewie/Botader.obj");
+
 
 	//Inicialización de KeyFrames
 	for (int i = 0; i < MAX_FRAMES; i++)
@@ -471,6 +481,7 @@ int main() {
 	glm::mat4 viewOp = glm::mat4(1.0f);		//Use this matrix for ALL models
 	glm::mat4 projectionOp = glm::mat4(1.0f);	//This matrix is for Projection
 
+	glm::mat4 tmpStewie = glm::mat4(1.0f);
 	// render loop
 	// -----------
 	while (!glfwWindowShouldClose(window))
@@ -568,22 +579,14 @@ int main() {
 		animShader.setVec3("light.direction", lightDirection);
 		animShader.setVec3("viewPos", camera.Position);
 
-		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-40.3f, 1.75f, 0.3f)); // translate it down so it's at the center of the scene
-		modelOp = glm::scale(modelOp, glm::vec3(0.05f));	// it's a bit too big for our scene, so scale it down
-		modelOp = glm::rotate(modelOp, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		animShader.setMat4("model", modelOp);
-		animacionPersonaje.Draw(animShader);
-
 		// -------------------------------------------------------------------------------------------------------------------------
-		// Segundo Personaje Animacion
+		// Personaje animado
 		// -------------------------------------------------------------------------------------------------------------------------
 		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 20.0f)); // translate it down so it's at the center of the scene
 		modelOp = glm::scale(modelOp, glm::vec3(0.10f));	// it's a bit too big for our scene, so scale it down
 		//modelOp = glm::rotate(modelOp, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		animShader.setMat4("model", modelOp);
 		vampiro.Draw(animShader);
-
-
 
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Escenario Primitivas
@@ -636,7 +639,18 @@ int main() {
 		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(250.0f, 0.0f, -10.0f));
 		modelOp = glm::rotate(modelOp, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		staticShader.setMat4("model", modelOp);
-		casaDoll.Draw(staticShader);
+		//casaDoll.Draw(staticShader);
+
+		//Stewie
+		tmpStewie =	modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-10.0f, 0.0f, 20.0f));
+		staticShader.setMat4("model", modelOp);
+		STorso.Draw(staticShader);
+
+		modelOp = glm::translate(tmpStewie, glm::vec3(0.0f, 1.5f, 0.0f));
+		staticShader.setMat4("model", modelOp);
+		SCabeza.Draw(staticShader);
+
+
 
 		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -1.75f, 0.0f));
 		modelOp = glm::scale(modelOp, glm::vec3(0.2f));
