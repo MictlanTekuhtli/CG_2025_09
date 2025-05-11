@@ -1,0 +1,9 @@
+	
+      		x,	z,  	Y
+cabeza 		0,  	0,  	1.5
+brazoizq 	0.75,	0,	1.5
+brazoder 	-0.75,	0,	1.75
+piernaizq 	0.5,	-0.1,	0
+piernader 	-0.5,	-.1,	0
+botaizq 	0.5,	0,	-0.9
+botader 	-0.5,	0,	-0.9
