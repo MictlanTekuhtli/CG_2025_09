@@ -1,5 +1,6 @@
 /*---------------------------------------------------------*/
-/* ----------------   Pr·ctica 7 --------------------------*/
+/* ----------------   Pr√°ctica 7 --------------------------*/
+/* ----------------   Pr√°ctica  ---------------------------*/
 /*-----------------    2025-2   ---------------------------*/
 /*---------- Alumno: Lopez Flores Diego Alberto -----------*/
 /*------------- No. Cuenta: 315081143 ---------------------*/
@@ -41,9 +42,9 @@ unsigned int SCR_HEIGHT = 600;
 GLFWmonitor* monitors;
 
 GLuint VBO[3], VAO[3], EBO[3];
-//wasubo
+
 //Camera
-Camera camera(glm::vec3(0.0f, 10.0f, 100.0f)); //aqui se da el valor de posicion de la camara, siendo el vector de pocision
+Camera camera(glm::vec3(0.0f, 10.0f, 3.0f));
 float MovementSpeed = 0.1f;
 GLfloat lastX = SCR_WIDTH / 2.0f,
 		lastY = SCR_HEIGHT / 2.0f;
@@ -57,8 +58,8 @@ lastFrame = 0.0f;
 
 void getResolution(void);
 void myData(void);							// De la practica 4
-void LoadTextures(void);					// De la pr·ctica 6
-unsigned int generateTextures(char*, bool, bool);	// De la pr·ctica 6
+void LoadTextures(void);					// De la pr√°ctica 6
+unsigned int generateTextures(char*, bool, bool);	// De la pr√°ctica 6
 
 //For Keyboard
 float	movX = 0.0f,
@@ -93,7 +94,7 @@ recorrido3 = false,
 recorrido4 = false;
 
 
-//Keyframes (ManipulaciÛn y dibujo)
+//Keyframes (Manipulaci√≥n y dibujo)
 float	posX = 0.0f,
 		posY = 0.0f,
 		posZ = 0.0f,
@@ -128,7 +129,7 @@ typedef struct _frame
 }FRAME;
 
 FRAME KeyFrame[MAX_FRAMES];
-int FrameIndex = 3;			//introducir n˙mero en caso de tener Key guardados
+int FrameIndex = 3;			//introducir n√∫mero en caso de tener Key guardados
 bool play = false;
 int playIndex = 0;
 
@@ -232,6 +233,8 @@ void LoadTextures()
 	t_white = generateTextures("Texturas/white.jpg", 0, false);
 }
 
+
+
 void animate(void) 
 {
 	if (play)
@@ -270,7 +273,7 @@ void animate(void)
 		}
 	}
 
-	//VehÌculo
+	//Veh√≠culo
 	if (animacion)
 	{
 		movAuto_x += 3.0f;
@@ -472,25 +475,19 @@ int main() {
 	skyboxShader.setInt("skybox", 0);
 
 	// load models
-	// ------------------------------------------------------------------------------
-
+	// -----------
+	Model piso("resources/objects/piso/piso.obj");
+	Model carro("resources/objects/lambo/carroceria.obj");
+	Model llanta("resources/objects/lambo/Wheel.obj");
+	Model casaVieja("resources/objects/casa/OldHouse.obj");
 	//Model cubo("resources/objects/cubo/cube02.obj");
 	Model casaDoll("resources/objects/casa/DollHouse.obj");
 
-	ModelAnim vampiro("resources/models/Vampiro/Vampiro.dae");
-	vampiro.initShaders(animShader.ID);
-
-	Model SCabeza("resources/objects/Stewie/Cabeza.obj");
-	Model STorso("resources/objects/Stewie/Torso.obj");
-	Model SBrazoizq("resources/objects/Stewie/Brazoizq.obj");
-	Model SBrazoder("resources/objects/Stewie/Brazoder.obj");
-	Model SPiernaizq("resources/objects/Stewie/Piernaizq.obj");
-	Model SPiertnader("resources/objects/Stewie/Piernader.obj");
-	Model SBotaizq("resources/objects/Stewie/Botaizq.obj");
-	Model SBotader("resources/objects/Stewie/Botader.obj");
+	ModelAnim animacionPersonaje("resources/objects/Personaje1/Arm.dae");
+	animacionPersonaje.initShaders(animShader.ID);
 
 
-	//InicializaciÛn de KeyFrames
+	//Inicializaci√≥n de KeyFrames
 	for (int i = 0; i < MAX_FRAMES; i++)
 	{
 		KeyFrame[i].posX = 0;
@@ -534,6 +531,7 @@ int main() {
 
 	glm::mat4 tmpStewie = glm::mat4(1.0f);
 	glm::mat4 tmpPierna = glm::mat4(1.0f);
+
 	// render loop
 	// -----------
 	while (!glfwWindowShouldClose(window))
@@ -631,15 +629,21 @@ int main() {
 		animShader.setVec3("light.direction", lightDirection);
 		animShader.setVec3("viewPos", camera.Position);
 
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(-40.3f, 1.75f, 0.3f)); // translate it down so it's at the center of the scene
+		modelOp = glm::scale(modelOp, glm::vec3(0.05f));	// it's a bit too big for our scene, so scale it down
+		modelOp = glm::rotate(modelOp, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		animShader.setMat4("model", modelOp);
+		animacionPersonaje.Draw(animShader);
+
 		// -------------------------------------------------------------------------------------------------------------------------
-		// Personaje animado
+		// Segundo Personaje Animacion
 		// -------------------------------------------------------------------------------------------------------------------------
+
 		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(20.0f, 0.0f, 20.0f)); // translate it down so it's at the center of the scene
 		modelOp = glm::scale(modelOp, glm::vec3(0.10f));	// it's a bit too big for our scene, so scale it down
 		//modelOp = glm::rotate(modelOp, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		animShader.setMat4("model", modelOp);
 		vampiro.Draw(animShader);
-
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Escenario Primitivas
 		// -------------------------------------------------------------------------------------------------------------------------
@@ -647,7 +651,7 @@ int main() {
 
 		//Tener Piso como referencia
 		glBindVertexArray(VAO[2]);
-		//Colocar cÛdigo aquÌ
+		//Colocar c√≥digo aqu√≠
 		modelOp = glm::scale(glm::mat4(1.0f), glm::vec3(40.0f, 2.0f, 40.0f));
 		modelOp = glm::translate(modelOp, glm::vec3(0.0f, -1.0f, 0.0f));
 		modelOp = glm::rotate(modelOp, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -657,7 +661,7 @@ int main() {
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		glBindVertexArray(VAO[0]);
-		//Colocar cÛdigo aquÌ
+		//Colocar c√≥digo aqu√≠
 		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 10.0f, 0.0f));
 		modelOp = glm::scale(modelOp, glm::vec3(5.0f, 5.0f, 1.0f));
 		myShader.setMat4("model", modelOp);
@@ -687,7 +691,7 @@ int main() {
 		staticShader.use();
 		staticShader.setMat4("projection", projectionOp);
 		staticShader.setMat4("view", viewOp);
-		
+
 		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(250.0f, 0.0f, -10.0f));
 		modelOp = glm::rotate(modelOp, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		staticShader.setMat4("model", modelOp);
@@ -736,6 +740,7 @@ int main() {
 		modelOp = glm::scale(modelOp, glm::vec3(0.2f));
 		staticShader.setMat4("model", modelOp);
 		//piso.Draw(staticShader);
+
 
 		//-------------------------------------------------------------------------------------
 		// draw skybox as last
