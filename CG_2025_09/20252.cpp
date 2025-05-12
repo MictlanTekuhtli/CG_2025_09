@@ -3,6 +3,8 @@
 /*-----------------    2025-2   ---------------------------*/
 /*---------- Alumno: Lopez Flores Diego Alberto -----------*/
 /*------------- No. Cuenta: 315081143 ---------------------*/
+/*---------- Alumno: Cruz Cruz Lizbeth -----------*/
+/*------------- No. Cuenta: 318114259 ---------------------*/
 
 #include <Windows.h>
 
@@ -71,7 +73,7 @@ unsigned int	t_smile,
 t_toalla,
 t_unam,
 t_white,
-t_ladrillos;
+t_concreto;
 
 //Lighting
 glm::vec3 lightPosition(0.0f, 4.0f, -10.0f);
@@ -227,7 +229,7 @@ void LoadTextures()
 	t_smile = generateTextures("Texturas/awesomeface.png", 1, true);
 	t_toalla = generateTextures("Texturas/toalla.tga", 0, true);
 	t_unam = generateTextures("Texturas/escudo_unam.jpg", 0, true);
-	t_ladrillos = generateTextures("Texturas/bricks.jpg", 0, true);
+	t_concreto = generateTextures("C:/Users/Lenovo/Documents/PROYECTO_CGIHC/CG_2025_09/CG_2025_09/Texturas/concre.jpg", 0, true);
 	//This must be the last
 	t_white = generateTextures("Texturas/white.jpg", 0, false);
 }
@@ -474,8 +476,8 @@ int main() {
 	// load models
 	// ------------------------------------------------------------------------------
 
-	//Model cubo("resources/objects/cubo/cube02.obj");
-	Model casaDoll("resources/objects/casa/DollHouse.obj");
+	Model edificio("C:/Users/Lenovo/Documents/PROYECTO_CGIHC/CG_2025_09/CG_2025_09/resources/objects/Edificio/Edificio.obj");
+	//Model casaDoll("resources/objects/casa/DollHouse.obj");
 
 	ModelAnim vampiro("resources/models/Vampiro/Vampiro.dae");
 	vampiro.initShaders(animShader.ID);
@@ -653,7 +655,7 @@ int main() {
 		modelOp = glm::rotate(modelOp, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 		myShader.setMat4("model", modelOp);
 		myShader.setVec3("aColor", 1.0f, 1.0f, 1.0f);
-		glBindTexture(GL_TEXTURE_2D, t_ladrillos);
+		glBindTexture(GL_TEXTURE_2D, t_concreto);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		glBindVertexArray(VAO[0]);
@@ -688,10 +690,10 @@ int main() {
 		staticShader.setMat4("projection", projectionOp);
 		staticShader.setMat4("view", viewOp);
 		
-		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(250.0f, 0.0f, -10.0f));
+		modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(10.0f, 10.0f, 10.0f));
 		modelOp = glm::rotate(modelOp, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		staticShader.setMat4("model", modelOp);
-		//casaDoll.Draw(staticShader);
+		edificio.Draw(staticShader);
 
 		//Stewie
 		tmpStewie =	modelOp = glm::translate(glm::mat4(1.0f), glm::vec3(posX, posY, posZ));
