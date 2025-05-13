@@ -35,9 +35,3 @@ Este proyecto tiene como objetivo la **reconstrucción de una estructura arquite
 
 ---
 
-## 📜 Licencia
-
-Este proyecto está licenciado bajo los términos de la licencia MIT.
-
----
-
